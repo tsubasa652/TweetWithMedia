@@ -14,11 +14,7 @@ def tweetWithMedia(tweet, filePath):
             os.environ["ACCESS_TOKEN"],
             os.environ["ACCESS_TOKEN_SECRET"]
         )
-        params = {
-            "command": "INIT",
-            "total_bytes": os.path.getsize(filePath),
-            "media_type": "image/jpeg"
-        }
+        
         f = open(filePath, 'rb')
         files = {'media': f.read()}
         res = twitter.post(twitter_upload_media_url, files=files)
@@ -40,6 +36,9 @@ def tweetWithMedia(tweet, filePath):
         }
         res = twitter.post("https://api.twitter.com/1.1/statuses/update.json", params = params)
         
-        print(res.text)
+        if res.status_code != 200:
+            print("ツイート失敗：", res.text, res.status_code)
+        else:
+            print("ツイートしました")
     except Exception as e:
         print(e)
