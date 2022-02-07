@@ -1,6 +1,5 @@
 import os
 from requests_oauthlib import OAuth1Session
-from time import sleep
 
 twitter_base_url = 'https://api.twitter.com'
 twitter_upload_media_url = "https://upload.twitter.com/1.1/media/upload.json"
